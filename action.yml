@@ -45,6 +45,9 @@ inputs:
   version:
     description: Version of the app, usually commit sha works here.
     required: false
+  timeout:
+    description: Specify a timeout for helm deployment.
+    required: false
 runs:
   using: docker
   image: Dockerfile

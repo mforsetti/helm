@@ -6,9 +6,9 @@ ENV HELM_2_FILE="helm-v2.17.0-linux-amd64.tar.gz"
 ENV HELM_3_FILE="helm-v3.4.2-linux-amd64.tar.gz"
 
 RUN apk add --no-cache ca-certificates \
-    --repository http://dl-3.alpinelinux.org/alpine/edge/community/ \
-    --repository http://dl-3.alpinelinux.org/alpine/edge/main/ \
-    jq curl bash nodejs aws-cli && \
+    --repository http://dl-cdn.alpinelinux.org/alpine/v3.15/community \
+    --repository http://dl-cdn.alpinelinux.org/alpine/v3.15/main \
+    jq curl bash nodejs aws-cli \
     # Install helm version 2:
     curl -L ${BASE_URL}/${HELM_2_FILE} |tar xvz && \
     mv linux-amd64/helm /usr/bin/helm && \
@@ -22,7 +22,7 @@ RUN apk add --no-cache ca-certificates \
     # Init version 2 helm:
     helm init --client-only
 
-ENV PYTHONPATH "/usr/lib/python3.10/site-packages/"
+ENV PYTHONPATH "/usr/lib/python3.9/site-packages/"
 
 COPY . /usr/src/
 ENTRYPOINT ["node", "/usr/src/index.js"]
